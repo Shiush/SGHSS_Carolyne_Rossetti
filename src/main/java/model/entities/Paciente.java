@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 import model.enums.TipoAtendimento;
 
 @Entity
-@Table(name = "Pacientes")
+@Table(name = "pacientes")
 public class Paciente {
 
 	@Id

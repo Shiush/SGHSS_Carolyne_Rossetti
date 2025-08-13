@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Profissional_Saude")
+@Table(name = "profissional_saude")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class ProfissionalSaude {
 	

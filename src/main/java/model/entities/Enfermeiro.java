@@ -3,7 +3,7 @@ package model.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table (name = "Enfermeiros")
+@Table (name = "enfermeiros")
 public class Enfermeiro extends ProfissionalSaude{
 	
 	@Column (name = "Coren", nullable = false, length = 20)

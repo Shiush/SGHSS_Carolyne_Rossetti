@@ -1,9 +1,12 @@
 package model.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
-@Table (name = "Medico")
+@Table (name = "medicos")
 public class Medico extends ProfissionalSaude{
 	
 	@Column (name = "CRM", nullable = false, length = 20)
@@ -12,6 +15,8 @@ public class Medico extends ProfissionalSaude{
 	@Column (name = "Especialidade", nullable = false, length = 50)
 	private String especialidade;
 	
+	@OneToMany(mappedBy = "medico", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Agenda> agendas = new ArrayList<>();
 	
 	//Construtor sem parâmetros
 	public Medico() {
@@ -38,12 +43,31 @@ public class Medico extends ProfissionalSaude{
 	public void setEspecialidade(String especialidade) {
 		this.especialidade = especialidade;
 	}
+	public List<Agenda> getAgendas() {
+		return agendas;
+	}
+	
+	//Adicionar e remover agenda
+	public void adicionarAgenda(Agenda agenda) {
+	    agendas.add(agenda);
+	    agenda.setMedico(this);
+	}
+	public void removerAgenda(Agenda agenda) {
+	    agendas.remove(agenda);
+	    agenda.setMedico(null);
+	}
 	
 	@Override
 	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Agendas:\n");
+		for (Agenda agenda : agendas) {
+			sb.append(" - ").append(agenda.toString()).append("\n");
+		}
 		return super.toString()+
 				"Função: Médico(a) \n"+
 				"CRM : "+crm+"\n"+
-				"Especialidade: "+especialidade;
+				"Especialidade: "+especialidade+"\n"+
+				sb.toString();
 	}
 }
