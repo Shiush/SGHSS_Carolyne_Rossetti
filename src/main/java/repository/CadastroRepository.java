@@ -10,7 +10,7 @@ import model.entities.Cadastro;
 import model.enums.TipoCadastro;
 
 @Repository
-public interface CadastroRepository extends JpaRepository<CadastroRepository,Long> {
+public interface CadastroRepository extends JpaRepository<Cadastro,Long> {
 	
 	//Buscar cadastro pelo login
     Optional<Cadastro> findByLogin(String login);

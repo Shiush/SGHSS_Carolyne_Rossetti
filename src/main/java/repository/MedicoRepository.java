@@ -3,7 +3,9 @@ package repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import model.entities.Medico;
+
 @Repository
-public interface MedicoRepository extends JpaRepository<MedicoRepository, Long> {
+public interface MedicoRepository extends JpaRepository<Medico, Long> {
 
 }
