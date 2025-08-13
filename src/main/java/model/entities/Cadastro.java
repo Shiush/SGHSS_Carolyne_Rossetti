@@ -21,6 +21,12 @@ public class Cadastro {
 	@Enumerated(EnumType.STRING)
 	private TipoCadastro tipoCadastro;
 	
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "cadastro", optional = true)
+    private Paciente paciente;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "cadastro", optional = true)
+    private ProfissionalSaude profissionalSaude;
+	
 	//Construtor sem parâmetros
 	public Cadastro() {
 		
@@ -33,9 +39,11 @@ public class Cadastro {
 		this.tipoCadastro = tipoCadastro;
 	}
 
+	//Getters e Setters
 	public Long getId() {
 		return id;
 	}
+	
 	public String getLogin() {
 		return login;
 	}
@@ -59,7 +67,28 @@ public class Cadastro {
 	public void setTipoCadastro(TipoCadastro tipoCadastro) {
 		this.tipoCadastro = tipoCadastro;
 	}
-	
+	public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
+        if (paciente != null) {
+            paciente.setCadastro(this);
+        }
+    }
+
+    public ProfissionalSaude getProfissionalSaude() {
+        return profissionalSaude;
+    }
+
+    public void setProfissionalSaude(ProfissionalSaude profissionalSaude) {
+        this.profissionalSaude = profissionalSaude;
+        if (profissionalSaude != null) {
+            profissionalSaude.setCadastro(this);
+        }
+    }
+    
 	@Override
 	public String toString() {
 	    return "Cadastro\n" +
