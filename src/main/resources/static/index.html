@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Protótipo SGHSS</title>
+</head>
+<body>
+    <h1>SGHSS - Protótipo funcionando</h1>
+    <p>Este é um exemplo simples de front-end.</p>
+
+    <button onclick="marcarConsulta()">Marcar Consulta</button>
+
+    <script>
+    function marcarConsulta() {
+        fetch('/consultas/marcar?pacienteId=1&medicoId=1&agendaId=1&tipoConsulta=PRESENCIAL', {
+            method: 'POST'
+        })
+        .then(response => response.json())
+        .then(data => alert('Consulta marcada! ID: ' + data.id))
+        .catch(error => alert('Erro: ' + error));
+    }
+    </script>
+</body>
+</html>
