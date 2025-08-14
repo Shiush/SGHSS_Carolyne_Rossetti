@@ -68,6 +68,13 @@ public class Agenda {
 		return medico;
 	}
 	
+	public Consulta getConsulta(){
+		return consulta;
+	}
+	
+	public void setConsulta(Consulta consulta) {
+		this.consulta = consulta;
+	}
 	@Override
 	public String toString() {
 		return diaHora.format(DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm"))
