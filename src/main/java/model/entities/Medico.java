@@ -18,6 +18,9 @@ public class Medico extends ProfissionalSaude{
 	@OneToMany(mappedBy = "medico", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Agenda> agendas = new ArrayList<>();
 	
+    @OneToMany(mappedBy = "medico", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Consulta> consultas = new ArrayList<>();
+
 	//Construtor sem parâmetros
 	public Medico() {
 		super();
@@ -57,6 +60,19 @@ public class Medico extends ProfissionalSaude{
 	    agenda.setMedico(null);
 	}
 	
+	public List<Consulta> getConsultas() {
+        return consultas;
+    }
+
+    public void adicionarConsulta(Consulta consulta) {
+        consultas.add(consulta);
+        consulta.setMedico(this);
+    }
+
+    public void removerConsulta(Consulta consulta) {
+        consultas.remove(consulta);
+        consulta.setMedico(null);
+    }
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();

@@ -24,7 +24,11 @@ public class Agenda {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "medico_id",nullable = false)
 	private Medico medico;
+
 	
+    @OneToOne(mappedBy = "agenda", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private Consulta consulta;
+    
 	//Construtor sem parâmetros
 	public Agenda() {
 		

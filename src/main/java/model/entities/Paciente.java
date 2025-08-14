@@ -2,8 +2,21 @@ package model.entities;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import model.enums.TipoAtendimento;
 
 @Entity
@@ -30,6 +43,9 @@ public class Paciente {
 	@OneToOne
     @JoinColumn(name = "cadastro_id")
     private Cadastro cadastro;
+	
+	@OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Consulta> consultas = new ArrayList<>();
 	
 	public Paciente() {
 		
@@ -86,6 +102,20 @@ public class Paciente {
 
     public void setCadastro(Cadastro cadastro) {
         this.cadastro = cadastro;
+    }
+    
+    public List<Consulta> getConsultas() {
+        return consultas;
+    }
+
+    public void adicionarConsulta(Consulta consulta) {
+        consultas.add(consulta);
+        consulta.setPaciente(this);
+    }
+
+    public void removerConsulta(Consulta consulta) {
+        consultas.remove(consulta);
+        consulta.setPaciente(null);
     }
 	@Override
 	public String toString() {
